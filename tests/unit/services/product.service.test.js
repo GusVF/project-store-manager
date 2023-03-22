@@ -6,6 +6,9 @@ const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
 
 describe('Unit test for product "Service"', function () {
+  afterEach(function () {
+    sinon.restore();
+  });
   it('Lists all products with query', async function () {
     sinon.stub(productsModel, 'findAll').resolves(allProducts);
 
@@ -16,12 +19,12 @@ describe('Unit test for product "Service"', function () {
   it('Returns an "error" in case of "id" does not exist', async function () {
     const result = await productsService.getById('a');
     expect(result.type).to.equal('PRODUCT_NOT_FOUND');
-    expect(result.message).to.equal('Product not found')
+    expect(result.message).to.be.deep.equal('Product not found')
   });
   it('Returns the correct product with "id"', async function () {
-    sinon.stub(productsModel, 'findAll').resolves(allProducts[0]);
+    sinon.stub(productsModel, 'getById').resolves(allProducts[0]);
 
-    const result = await productsService.findAll(1);
+    const result = await productsService.getById(1);
     expect(result.type).to.equal(null);
     expect(result.message).to.deep.equal(allProducts[0]);
   });

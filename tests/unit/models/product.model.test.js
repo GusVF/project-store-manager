@@ -6,6 +6,9 @@ const connection = require('../../../src/models/connection');
 const { allProducts } = require('./mocks/product.model.mock');
 
 describe('Unit test for product "Model"', function () {
+  afterEach(function () {
+    connection.execute.restore();
+  });
   it("Lists all products", async function () {
     sinon.stub(connection, 'execute').resolves([allProducts]);
 
