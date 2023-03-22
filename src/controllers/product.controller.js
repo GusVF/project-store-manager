@@ -1,5 +1,4 @@
 const { productsService } = require('../services');
-// console.log(productsService);
 const errorMap = require('../utils/errorMap');
 
 const findAll = async (_req, res) => {
