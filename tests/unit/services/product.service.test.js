@@ -1,9 +1,11 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
-const { allProducts } = require("./mocks/product.service.mock");
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
+const { allProducts, validName, invalidName, newProduct } = require("./mocks/product.service.mock");
+const { getById } = require('../../../src/models/product.model');
+
 
 describe('Unit test for product "Service"', function () {
   afterEach(function () {
@@ -27,5 +29,23 @@ describe('Unit test for product "Service"', function () {
     const result = await productsService.getById(1);
     expect(result.type).to.equal(null);
     expect(result.message).to.deep.equal(allProducts[0]);
+  });
+});
+// Testa a insercao de um produto
+describe('Tests the insertion of a product', function () {
+  it('Tests the addition of a product with invalid value', async function () {
+    const result = await productsService.createProduct(invalidName);
+
+    expect(result.type).to.equal("INVALID_VALUE");
+    expect(result.message).to.equal('"value" length must be at least 5 characters long');
+  });
+
+  it('Tests the addition of a product with success', async function () {
+    sinon.stub(productsModel, 'insert').resolves(1);
+    sinon.stub(productsModel, 'getById').resolves(allProducts[0]);
+    const result = await productsService.createProduct(validName);
+
+    expect(result.type).to.equal(null);
+    expect(result.message).to.equal(allProducts[0]);
   });
 });
