@@ -5,10 +5,10 @@
     "containerId": "",
     "name": "http://localhost:3001/products",
     "url": "http://localhost:3001/products",
-    "method": "POST",
+    "method": "GET",
     "sortNum": 0,
     "created": "2023-03-21T20:29:08.455Z",
-    "modified": "2023-03-23T11:43:09.490Z",
+    "modified": "2023-03-23T18:27:34.859Z",
     "headers": [],
     "params": [],
     "body": {
@@ -30,6 +30,63 @@
     "modified": "2023-03-21T21:24:43.824Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "216bcced-3ac4-44bd-b222-9023f84e9aab",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/sales",
+    "url": "http://localhost:3001/sales",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-23T18:44:37.648Z",
+    "modified": "2023-03-27T19:12:20.592Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "af5a7a96-829b-4f84-b5ae-1dbaf3b67659",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/sales",
+    "url": "http://localhost:3001/products/1",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-23T18:44:48.614Z",
+    "modified": "2023-03-25T11:45:48.191Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "36a7c64f-b52e-4448-9d4f-7dc66634d109",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/sales",
+    "url": "http://localhost:3001/sales",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-23T18:48:47.790Z",
+    "modified": "2023-03-24T20:18:38.142Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
     "tests": []
   }
 ]
