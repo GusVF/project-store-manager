@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
 
-const { allProducts, newProduct } = require('./mocks/product.model.mock');
+const { allProducts,newProduct } = require('./mocks/product.model.mock');
 
 describe('Unit test for product "Model"', function () {
   afterEach(function () {

@@ -4,7 +4,6 @@ const connection = require('../../../src/models/connection');
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
 const { allProducts, validName, invalidName, newProduct } = require("./mocks/product.service.mock");
-const { getById } = require('../../../src/models/product.model');
 
 
 describe('Unit test for product "Service"', function () {

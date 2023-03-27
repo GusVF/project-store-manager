@@ -18,7 +18,6 @@ const createNewSale = async (productsArray) => {
       quantity: item.quantity,
     })),
   };
-  // console.log(newSale);
   return { status: 201, message: newSale };
 };
 
