@@ -1,5 +1,6 @@
 const { salesModel, productsModel } = require('../models');
-
+const schemas = require('./validationsInputValue');
+// Cria uma nova venda
 const createNewSale = async (productsArray) => {
   const idInProduct = await Promise.all(productsArray.map(({ productId }) => 
     productsModel.getById(productId)));
@@ -20,7 +21,24 @@ const createNewSale = async (productsArray) => {
   };
   return { status: 201, message: newSale };
 };
+// Busca todas as vendas
+const getSales = async () => {
+  const sales = await salesModel.getSales();
+  return { type: null, message: sales };
+};
+// Busca vendas por id
+const getSalesById = async (saleID) => {
+  const error = schemas.validateId(saleID);
+  if (error.type) return error;
+
+  const sales = await salesModel.getSalesById(saleID);
+  if (sales.length <= 0) return { status: 404, message: 'Sale not found' };
+  console.log('service', sales);
+  return { status: null, message: sales };
+};
 
 module.exports = {
   createNewSale,
+  getSales,
+  getSalesById,
 };

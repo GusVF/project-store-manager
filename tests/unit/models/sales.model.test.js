@@ -13,9 +13,6 @@ const { salesMockSuccess,
   badProductId,} = require('./mocks/sales.model.mock');
 
 describe('Unit tests for Sales "Model"', function () {
-  // afterEach(function () {
-  //   connection.execute.restore();
-  // });
   it('Adds a sale to "Sales" table', async function () {
     sinon.stub(connection, "execute").resolves([{ insertId: 10 }]);
     const result = await salesModel.createNewSale(date);
@@ -33,6 +30,4 @@ describe('Unit tests for Sales "Model"', function () {
       expect(result).to.be.equal(1);
     });
   });
-  // afterEach(function () {
-  //   sinon.restore();
-  // });
+

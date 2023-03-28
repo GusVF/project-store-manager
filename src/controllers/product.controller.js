@@ -8,7 +8,7 @@ const findAll = async (_req, res) => {
 
   res.status(200).json(message);
 };
-// Pega o produto por id
+// Seleciona produto por id
 const getById = async (req, res) => {
   const { id } = req.params;
   const { type, message } = await productsService.getById(id);
