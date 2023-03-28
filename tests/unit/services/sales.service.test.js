@@ -10,7 +10,9 @@ const { salesMockSuccess,
   saleId,
   productId,
   badProductId,
-  quantity } = require('./mocks/sales.service.mock');
+  quantity,
+  getSalesByIdMock,
+  getSalesMock,} = require('./mocks/sales.service.mock');
 
 describe('Unit tests for service layer', function() {
   it('Tests the addition of a new sale with success', async function () {
@@ -32,5 +34,30 @@ describe('Unit tests for service layer', function() {
 
     expect(result.status).to.equal(404);
     expect(result.message).to.equal('Product not found');
+  });
+});
+// Test for "GET" sales query
+describe('Unit tests for "GET" sales and sales by Id', function () {
+  afterEach(function () {
+    sinon.restore();
+  });
+  it('Tests the query to "GET" all sales in database', async function () {
+    sinon.stub(salesModel, 'getSales').resolves(getSalesMock);
+
+    const result = await salesService.getSales();
+    expect(result.type).to.be.equal(null);
+    expect(result.message).to.be.equal(getSalesMock);
+  });
+  it('Tests the query to "GET" all sales in database with id', async function () {
+    sinon.stub(salesModel, 'getSalesById').resolves(getSalesByIdMock);
+    
+    const result = await salesService.getSalesById(1);
+    expect(result.status).to.be.equal(null);
+    expect(result.message).to.be.equal(getSalesByIdMock);
+  });
+  it('Tests the query to "GET" a apecific sale in database with id', async function () {
+    const result = await salesService.getSalesById(999);
+    expect(result.status).to.be.equal(404);
+    expect(result.message).to.be.equal('Sale not found');
   });
 });

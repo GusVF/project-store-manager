@@ -3,14 +3,14 @@ const sinon = require("sinon");
 const { salesModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
 
-const { salesMockSuccess,
-  salesMockFail,
-  saleWithId,
+const {
   date,
   saleId,
   productId,
   quantity,
-  badProductId,} = require('./mocks/sales.model.mock');
+  getSalesMock,
+  getSalesByIdMock,
+  } = require('./mocks/sales.model.mock');
 
 describe('Unit tests for Sales "Model"', function () {
   it('Adds a sale to "Sales" table', async function () {
@@ -30,4 +30,15 @@ describe('Unit tests for Sales "Model"', function () {
       expect(result).to.be.equal(1);
     });
   });
+describe('Unit test for "GET" query on all sales and sales with id', function () {
+  afterEach(function () {
+    connection.execute.restore();
+  });
+  it('Test the query "GET" on all sales', async function () {
+    sinon.stub(connection, 'execute').resolves([getSalesMock]);
+
+    const result = await salesModel.getSales();
+    expect(result).to.be.equal(getSalesMock);
+  });
+});
 
