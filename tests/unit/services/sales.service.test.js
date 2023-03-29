@@ -14,7 +14,10 @@ const { salesMockSuccess,
   getSalesByIdMock,
   getSalesMock,} = require('./mocks/sales.service.mock');
 
-describe('Unit tests for service layer', function() {
+describe('Unit tests for service layer', function () {
+  afterEach(function () {
+    sinon.restore()
+  });
   it('Tests the addition of a new sale with success', async function () {
     sinon.stub(salesModel, 'createNewSale').resolves(1);
     sinon.stub(productsModel, 'getById').resolves(1)
@@ -25,9 +28,9 @@ describe('Unit tests for service layer', function() {
     expect(result.message).to.deep.equal(saleWithId);
   });
   it('Tests the addition of a new sale fail', async function () {
-    const result = await salesService.createNewSale(salesMockFail);
-    sinon.stub(salesModel, 'createNewSale').resolves(0);
+    sinon.stub(salesModel, 'createNewSale').resolves();
     sinon.stub(productsModel, 'getById').resolves(10);
+    const result = await salesService.createNewSale(salesMockFail);
     sinon
       .stub(salesModel, 'createNewProductsSale')
       .resolves(saleId, badProductId, quantity);
@@ -38,9 +41,9 @@ describe('Unit tests for service layer', function() {
 });
 // Test for "GET" sales query
 describe('Unit tests for "GET" sales and sales by Id', function () {
-  afterEach(function () {
-    sinon.restore();
-  });
+  // afterEach(function () {
+  //   sinon.restore();
+  // });
   it('Tests the query to "GET" all sales in database', async function () {
     sinon.stub(salesModel, 'getSales').resolves(getSalesMock);
 
@@ -59,5 +62,8 @@ describe('Unit tests for "GET" sales and sales by Id', function () {
     const result = await salesService.getSalesById(999);
     expect(result.status).to.be.equal(404);
     expect(result.message).to.be.equal('Sale not found');
+    // afterEach(function () {
+    //   sinon.restore();
+    // });
   });
 });
