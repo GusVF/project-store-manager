@@ -33,7 +33,7 @@ describe('Unit tests for service layer', function () {
     const result = await salesService.createNewSale(salesMockFail);
     sinon
       .stub(salesModel, 'createNewProductsSale')
-      .resolves(saleId, badProductId, quantity);
+      .resolves();
 
     expect(result.status).to.equal(404);
     expect(result.message).to.equal('Product not found');

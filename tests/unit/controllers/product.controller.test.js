@@ -68,3 +68,6 @@ describe('Test the addition of a new product in Controller', function () {
     expect(res.json).to.have.been.calledWith(newProductMock);
   });
 });
+describe('Test the function that changes a product name', function () {
+  
+});
