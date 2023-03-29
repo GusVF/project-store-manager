@@ -22,9 +22,18 @@ const createProduct = async (req, res) => {
   if (type) return res.status(errorMap.mapError(type)).json(message);
   res.status(201).json(message);
 };
+// faz UPDATE em um produto
+const updateProductName = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  const { status, message } = await productsService.updateProductName(name, id);
+  if (status === 404) return res.status(404).json({ message });
+  res.status(200).json(message);
+};
 
 module.exports = {
   getById,
   findAll,
   createProduct,
+  updateProductName,
 };

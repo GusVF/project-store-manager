@@ -2,8 +2,8 @@ const { salesModel, productsModel } = require('../models');
 const schemas = require('./validationsInputValue');
 // Cria uma nova venda
 const createNewSale = async (productsArray) => {
-  const idInProduct = await Promise.all(productsArray.map(({ productId }) => 
-    productsModel.getById(productId)));
+  const idInProduct = await Promise.all(productsArray.map(({ id }) => 
+    productsModel.getById(id)));
   const selectId = idInProduct.some((prodId) => !prodId); 
   if (selectId) return { status: 404, message: 'Product not found' };
 
