@@ -29,7 +29,7 @@ describe('Unit tests for service layer', function () {
   });
   it('Tests the addition of a new sale fail', async function () {
     sinon.stub(salesModel, 'createNewSale').resolves();
-    sinon.stub(productsModel, 'getById').resolves(10);
+    sinon.stub(productsModel, 'getById').resolves();
     const result = await salesService.createNewSale(salesMockFail);
     sinon
       .stub(salesModel, 'createNewProductsSale')
@@ -37,13 +37,14 @@ describe('Unit tests for service layer', function () {
 
     expect(result.status).to.equal(404);
     expect(result.message).to.equal('Product not found');
+
   });
 });
 // Test for "GET" sales query
 describe('Unit tests for "GET" sales and sales by Id', function () {
-  // afterEach(function () {
-  //   sinon.restore();
-  // });
+  afterEach(function () {
+    sinon.restore();
+  });
   it('Tests the query to "GET" all sales in database', async function () {
     sinon.stub(salesModel, 'getSales').resolves(getSalesMock);
 
@@ -62,8 +63,8 @@ describe('Unit tests for "GET" sales and sales by Id', function () {
     const result = await salesService.getSalesById(999);
     expect(result.status).to.be.equal(404);
     expect(result.message).to.be.equal('Sale not found');
-    // afterEach(function () {
-    //   sinon.restore();
-    // });
+    afterEach(function () {
+      sinon.restore();
+    });
   });
 });
