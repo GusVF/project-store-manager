@@ -17,10 +17,11 @@ const validName = 'productX';
 const invalidName = 'a';
 
 const newProduct = { id: 4, name: "productX" }
-
+const updateProductName = { id: 1, name: "Martelo do Batman" };
 module.exports = {
   allProducts,
   validName,
   invalidName,
   newProduct,
+  updateProductName,
 };

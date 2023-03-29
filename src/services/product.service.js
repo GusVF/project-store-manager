@@ -27,7 +27,6 @@ const createProduct = async (name) => {
 const updateProductName = async (name, id) => {
   const validateId = await productsModel.getById(id);
   if (!validateId) return { status: 404, message: 'Product not found' };
-
   const updatedName = await productsModel.updateProductName(name, id);
   if (!id) return { status: 404, message: 'Product not found' };
   return { type: null, message: updatedName };

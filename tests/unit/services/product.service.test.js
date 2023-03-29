@@ -3,7 +3,13 @@ const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
-const { allProducts, validName, invalidName, newProduct } = require("./mocks/product.service.mock");
+const {
+  allProducts,
+  validName,
+  invalidName,
+  newProduct,
+  updateProductName,
+} = require("./mocks/product.service.mock");
 
 
 describe('Unit test for product "Service"', function () {
@@ -46,5 +52,24 @@ describe('Tests the insertion of a product', function () {
 
     expect(result.type).to.equal(null);
     expect(result.message).to.equal(allProducts[0]);
+  });
+});
+describe('Tests the change of a product name with "PUT" query', function () {
+  afterEach(function () {
+    sinon.restore();
+  });
+  it('Tests the updating of a product name with status 200', async function () {
+    sinon.stub(productsModel, 'getById').resolves(updateProductName);
+    sinon.stub(productsModel, 'updateProductName').resolves(updateProductName);
+    const result = await productsService.updateProductName('Martelo do Batman', 1);
+    expect(result.type).to.equal(null);
+    expect(result.message).to.equal(updateProductName);
+  });
+  it('Tests the updating of a product name with status 404', async function () {
+   sinon.stub(productsModel, "getById").resolves(false);
+   sinon.stub(productsModel, "updateProductName").resolves();
+   const result = await productsService.updateProductName('Martelo do Batman', 999);
+   expect(result.status).to.equal(404);
+   expect(result.message).to.equal('Product not found');
   });
 });

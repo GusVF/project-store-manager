@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
 
-const { allProducts,newProduct } = require('./mocks/product.model.mock');
+const { allProducts,newProduct, updateProductName } = require('./mocks/product.model.mock');
 
 describe('Unit test for product "Model"', function () {
   afterEach(function () {
@@ -33,5 +33,17 @@ describe('Unit test for adding new product', function () {
     afterEach(function () {
       sinon.restore();
     });
+  });
+});
+describe('Unit test for updating a product name', function () {
+  it('Updates a product name with "PUT" query', async function () {
+    const name = 'Martelo do Batman';
+    const id = 1;
+    sinon
+      .stub(connection, "execute")
+      .resolves([[updateProductName]]);
+    const result = await productsModel.updateProductName(updateProductName);
+    console.log('test', result);
+    expect(result).to.deep.equal({ id: 1, name: "Martelo do Batman" });
   });
 });

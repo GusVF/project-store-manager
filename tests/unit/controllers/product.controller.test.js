@@ -69,5 +69,40 @@ describe('Test the addition of a new product in Controller', function () {
   });
 });
 describe('Test the function that changes a product name', function () {
-  
+  afterEach(function () {
+    sinon.restore();
+  })
+  it('Tests the change of a product name', async function () {
+    const res = {};
+    const req = {
+      params: 1,
+      body: 'Martelo do Batman',
+    }
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productsService, 'updateProductName')
+      .resolves({ status: null, message: { id: 1, name: 'Martelo do Batman' } });
+    
+    await productsController.updateProductName(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith({
+      id: 1,
+      name: "Martelo do Batman",
+    });
+  });
+  it('Tests the change of a product name fail', async function () {
+    const res = {};
+    const req = {
+      params: 999,
+      body: 'Martelo do Batman',
+    }
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productsService, 'updateProductName')
+      .resolves({ status: 404, message: 'Product not found' });
+    
+    await productsController.updateProductName(req, res);
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found'});
+  });
 });

@@ -17,7 +17,11 @@ const newProduct = {
   name: "ProdutoX",
 };
 
+const updateProductName = { id: 1, name: "Martelo do Batman" };
+
+
 module.exports = {
   allProducts,
   newProduct,
+  updateProductName,
 };
