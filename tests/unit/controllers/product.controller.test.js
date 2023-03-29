@@ -106,3 +106,16 @@ describe('Test the function that changes a product name', function () {
     expect(res.json).to.have.been.calledWith({ message: 'Product not found'});
   });
 });
+describe('Unit tests for "DELETE" query', function () {
+  it(' tests the delition of a product with status 204', async function () {
+    const res = {};
+    const req = { params: 1 };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productsService, 'deleteById')
+      .resolves({ status: 204, });
+    
+    await productsController.deleteById(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+  });
+});

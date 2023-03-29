@@ -9,6 +9,7 @@ const {
   invalidName,
   newProduct,
   updateProductName,
+  validateId,
 } = require("./mocks/product.service.mock");
 
 
@@ -71,5 +72,13 @@ describe('Tests the change of a product name with "PUT" query', function () {
    const result = await productsService.updateProductName('Martelo do Batman', 999);
    expect(result.status).to.equal(404);
    expect(result.message).to.equal('Product not found');
+  });
+});
+describe('Tests the route "DELETE"', function () {
+  it('Tests the "DELETE" query with success and status 204', async function () {
+    // sinon.stub(productsModel, 'deleteById').resolves(2);
+    const result = await productsService.deleteById(validateId);
+
+    expect(result.type).to.equal(undefined);
   });
 });

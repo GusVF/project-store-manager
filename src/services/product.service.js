@@ -34,9 +34,10 @@ const updateProductName = async (name, id) => {
 
 const deleteById = async (id) => {
   const validateId = await productsModel.getById(id);
+  console.log(id);
   if (!validateId) return { status: 404, message: 'Product not found' };
-  const deleteProduct = await productsModel.deleteById(id);
-  return { type: null, message: deleteProduct };
+  await productsModel.deleteById(id);
+  return { type: null };
 };
 
 module.exports = {

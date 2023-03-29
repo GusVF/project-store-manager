@@ -34,6 +34,7 @@ const updateProductName = async (req, res) => {
 const deleteById = async (req, res) => {
   const { id } = req.params;
   const { status, message } = await productsService.deleteById(id);
+  console.log(status, message);
   if (status === 404) return res.status(404).json({ message });
   res.status(204).json(message);
 };

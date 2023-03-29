@@ -15,7 +15,7 @@ const allProducts = [
 
 const validName = 'productX';
 const invalidName = 'a';
-
+const validateId = 1;
 const newProduct = { id: 4, name: "productX" }
 const updateProductName = { id: 1, name: "Martelo do Batman" };
 module.exports = {
@@ -24,4 +24,5 @@ module.exports = {
   invalidName,
   newProduct,
   updateProductName,
+  validateId,
 };
