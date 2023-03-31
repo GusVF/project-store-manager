@@ -76,9 +76,9 @@ describe('Tests the change of a product name with "PUT" query', function () {
 });
 describe('Tests the route "DELETE"', function () {
   it('Tests the "DELETE" query with success and status 204', async function () {
-    // sinon.stub(productsModel, 'deleteById').resolves(2);
+    sinon.stub(productsModel, 'deleteById').resolves();
     const result = await productsService.deleteById(validateId);
 
-    expect(result.type).to.equal(undefined);
+    expect(result.type).to.equal(null);
   });
 });
